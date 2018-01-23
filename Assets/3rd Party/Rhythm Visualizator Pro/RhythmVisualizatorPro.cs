@@ -365,7 +365,21 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 			}
 
 			soundBars.Add (clone);
-		}
+            if (soundBars.Count == 1)
+            {
+                soundBars[0].AddComponent<Rigidbody>();
+                soundBars[0].GetComponent<Rigidbody>().useGravity = false;
+                soundBars[0].GetComponent<Rigidbody>().freezeRotation = true;
+            }
+            else if (soundBars.Count > 1)
+            {
+                clone.AddComponent<HingeJoint>();
+                clone.GetComponent<HingeJoint>().connectedBody = soundBars[(soundBars.Count) - 2].GetComponent<Rigidbody>();
+                clone.GetComponent<Rigidbody>().useGravity = false;
+                clone.GetComponent<Rigidbody>().freezeRotation = true;
+            }
+            soundBars[0].GetComponent<Rigidbody>().mass++;
+        }
 
 		UpdateVisualizations ();
 	}
