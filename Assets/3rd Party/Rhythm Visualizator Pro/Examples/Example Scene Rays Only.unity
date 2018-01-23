@@ -2343,9 +2343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbde61ba400a6f4490d73ef2d10f832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Cartoon
-  artist: On & On
-  songClip: {fileID: 8300000, guid: 613ff8aee1addd740b76c78db877bd43, type: 3}
+  title: Hang Massive
+  artist: Skanegatan
+  songClip: {fileID: 8300000, guid: dcbd7a4fc49de03458c29187ff90f43b, type: 3}
 --- !u!1 &629906586
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,13 +4628,23 @@ Prefab:
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: barsQuantity
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: length
       value: 122
       objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: listenAllSounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82330127656035978, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dcbd7a4fc49de03458c29187ff90f43b, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
   m_IsPrefabParent: 0

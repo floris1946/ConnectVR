@@ -367,12 +367,12 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
             if (prevClone != null)
             {
-                clone.GetComponent<HingeJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
-                clone.GetComponent<HingeJoint>().connectedAnchor = new Vector3(1, 0);
+                clone.GetComponent<ConfigurableJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
+                clone.GetComponent<ConfigurableJoint>().connectedAnchor = new Vector3(1, 0);
             }
             else
             {
-                Destroy(clone.GetComponent<HingeJoint>());
+                Destroy(clone.GetComponent<ConfigurableJoint>());
                 clone.GetComponent<Rigidbody>().mass = 50;
             }
 
