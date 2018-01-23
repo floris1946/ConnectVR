@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectVR", "ConnectVR.csproj", "{1AE13580-6E43-4C78-8BFB-6CD010767ED4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectVR.Editor", "ConnectVR.Editor.csproj", "{B6FD446B-71EE-1BAD-61E6-36ACBD90BB84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AE13580-6E43-4C78-8BFB-6CD010767ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE13580-6E43-4C78-8BFB-6CD010767ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE13580-6E43-4C78-8BFB-6CD010767ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE13580-6E43-4C78-8BFB-6CD010767ED4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6FD446B-71EE-1BAD-61E6-36ACBD90BB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6FD446B-71EE-1BAD-61E6-36ACBD90BB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6FD446B-71EE-1BAD-61E6-36ACBD90BB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6FD446B-71EE-1BAD-61E6-36ACBD90BB84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
