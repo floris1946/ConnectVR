@@ -11,14 +11,12 @@ using UnityEngine.SceneManagement;
 
 
 public class RhythmVisualizatorPro : MonoBehaviour {
-
+    
 	#region Variables
 
 	public GameObject soundBarPrefabCenter;
 	public GameObject soundBarPrefabDownside;
 	public Transform soundBarsTransform;
-
-
 
 	[Header ("Audio Settings")] [Tooltip ("Do you want to listen all incoming audios from other AudioSources?")]
 	public bool listenAllSounds;
@@ -218,7 +216,7 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
 	Visualizations lastVisualizationForm = Visualizations.Line;
 	int lastVisualization = 1;
-
+    
 	#endregion
 
 	#region Extra
@@ -326,7 +324,10 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 			soundBarToInstantiate = soundBarPrefabDownside;
 		}
 
-		for (int i = 0; i < usedSoundBars; i++) { 
+        GameObject prevClone = null;
+
+        for (int i = 0; i < usedSoundBars; i++) { 
+
 			
 			var clone = Instantiate (soundBarToInstantiate, transform.position, Quaternion.identity) as GameObject;
 			clone.transform.SetParent (soundBarsTransform.transform);
@@ -364,8 +365,21 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 				clone.GetComponent<SoundBar> ().ray.transform.localScale = new Vector3 (Mathf.Clamp (newWidth, 0.5f, Mathf.Infinity), 1, raysLenght);
 			}
 
-			soundBars.Add (clone);
-		}
+            if (prevClone != null)
+            {
+                clone.GetComponent<HingeJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
+                clone.GetComponent<HingeJoint>().connectedAnchor = new Vector3(1, 0);
+            }
+            else
+            {
+                Destroy(clone.GetComponent<HingeJoint>());
+                clone.GetComponent<Rigidbody>().mass = 50;
+            }
+
+            soundBars.Add (clone);
+
+            prevClone = clone;
+        }
 
 		UpdateVisualizations ();
 	}
@@ -664,12 +678,23 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
 	bool colorUpdated = false;
 
-	#region BaseScript
+    //Vector3 randompos = new Vector3(220, 320, 50);
 
-	/// <summary>
-	/// Updates every frame this instance.
-	/// </summary>
-	void LateUpdate () {
+    //private void FixedUpdate()
+    //{
+    //    for(int i = usedSoundBars - 1; i > 0; i--)
+    //    {
+    //        soundBars[i].transform.position = Vector3.Lerp(soundBars[i].transform.position, soundBars[i - 1].transform.position, Time.deltaTime * 5f);
+    //    }
+    //    soundBars[0].transform.position = Vector3.Lerp(soundBars[0].transform.position, randompos, Time.deltaTime * 5f);
+    //}
+
+    #region BaseScript
+
+    /// <summary>
+    /// Updates every frame this instance.
+    /// </summary>
+    void LateUpdate () {
 
 		// Change Colors
 		if (lerpColor) {

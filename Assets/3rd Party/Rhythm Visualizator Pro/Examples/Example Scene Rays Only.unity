@@ -4581,6 +4581,60 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 820634814}
+    - target: {fileID: 82330127656035978, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: scaleFrom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 164792, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: rotateCamera
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: cameraControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: useGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: bassSensibility
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: bassHorizontalScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: ScaleByRhythm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: barsQuantity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: length
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
   m_IsPrefabParent: 0
