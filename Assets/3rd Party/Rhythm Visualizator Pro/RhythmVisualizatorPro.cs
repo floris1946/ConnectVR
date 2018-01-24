@@ -369,12 +369,22 @@ public class RhythmVisualizatorPro : MonoBehaviour {
             {
                 clone.GetComponent<ConfigurableJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
                 clone.GetComponent<ConfigurableJoint>().connectedAnchor = new Vector3(1, 0);
+
+                if (i == usedSoundBars - 1)
+                {
+                    clone.GetComponent<Rigidbody>().mass = 50;
+                    clone.AddComponent<SnakeScript>();
+                    clone.GetComponent<SnakeScript>().speed = 0.2f;
+                    clone.GetComponent<SnakeScript>().distance = 500;
+                }
             }
             else
             {
                 Destroy(clone.GetComponent<ConfigurableJoint>());
                 clone.GetComponent<Rigidbody>().mass = 50;
                 clone.AddComponent<SnakeScript>();
+                clone.GetComponent<SnakeScript>().speed = 0.2f;
+                clone.GetComponent<SnakeScript>().distance = 500;
             }
 
             soundBars.Add (clone);
@@ -679,16 +689,6 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
 	bool colorUpdated = false;
 
-    //Vector3 randompos = new Vector3(220, 320, 50);
-
-    //private void FixedUpdate()
-    //{
-    //    for(int i = usedSoundBars - 1; i > 0; i--)
-    //    {
-    //        soundBars[i].transform.position = Vector3.Lerp(soundBars[i].transform.position, soundBars[i - 1].transform.position, Time.deltaTime * 5f);
-    //    }
-    //    soundBars[0].transform.position = Vector3.Lerp(soundBars[0].transform.position, randompos, Time.deltaTime * 5f);
-    //}
 
     #region BaseScript
 
