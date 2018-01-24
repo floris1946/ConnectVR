@@ -374,8 +374,8 @@ public class RhythmVisualizatorPro : MonoBehaviour {
                 {
                     clone.GetComponent<Rigidbody>().mass = 50;
                     clone.AddComponent<SnakeScript>();
-                    clone.GetComponent<SnakeScript>().speed = 0.2f;
-                    clone.GetComponent<SnakeScript>().distance = 500;
+                    clone.GetComponent<SnakeScript>().Speed = 0.2f;
+                    clone.GetComponent<SnakeScript>().Distance = 500;
                 }
             }
             else
@@ -383,8 +383,8 @@ public class RhythmVisualizatorPro : MonoBehaviour {
                 Destroy(clone.GetComponent<ConfigurableJoint>());
                 clone.GetComponent<Rigidbody>().mass = 50;
                 clone.AddComponent<SnakeScript>();
-                clone.GetComponent<SnakeScript>().speed = 0.2f;
-                clone.GetComponent<SnakeScript>().distance = 500;
+                clone.GetComponent<SnakeScript>().Speed = 0.2f;
+                clone.GetComponent<SnakeScript>().Distance = 500;
             }
 
             soundBars.Add (clone);
