@@ -34,7 +34,7 @@ public class SnakeBehavior : MonoBehaviour {
 
                 if (i == 1)
                 {
-                    Debug.Log(direction);
+                    //Debug.Log(direction);
                     Debug.DrawRay(soundbars[i].transform.position, direction * 100, Color.red);
                 }
 
@@ -49,7 +49,7 @@ public class SnakeBehavior : MonoBehaviour {
                 float alphaY = Mathf.Atan(direction.z / direction.x) * Mathf.Rad2Deg;
                 float alphaZ = Mathf.Atan(direction.y / direction.x) * Mathf.Rad2Deg;
 
-                Debug.Log(alphaX + " " + alphaY + " " + alphaZ);
+                //Debug.Log(alphaX + " " + alphaY + " " + alphaZ);
 
                 soundbars[i].transform.rotation = Quaternion.Euler(alphaX, alphaY, alphaZ);
             }

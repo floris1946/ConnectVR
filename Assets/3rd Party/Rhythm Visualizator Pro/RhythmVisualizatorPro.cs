@@ -326,44 +326,50 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
         GameObject prevClone = null;
 
-        for (int i = 0; i < usedSoundBars; i++) { 
+        for (int i = 0; i < usedSoundBars; i++)
+        {
 
-			
-			var clone = Instantiate (soundBarToInstantiate, transform.position, Quaternion.identity) as GameObject;
-			clone.transform.SetParent (soundBarsTransform.transform);
-			clone.GetComponent<SoundBar> ().cube.transform.localScale = new Vector3 (soundBarsWidth, 1, 1);
 
-			clone.name = string.Format ("SoundBar {0}", i + 1);
+            var clone = Instantiate(soundBarToInstantiate, transform.position, Quaternion.identity) as GameObject;
+            clone.transform.SetParent(soundBarsTransform.transform);
+            clone.GetComponent<SoundBar>().cube.transform.localScale = new Vector3(soundBarsWidth, 1, 1);
 
-			var renderers = clone.GetComponentsInChildren<Renderer> ();
+            clone.name = string.Format("SoundBar {0}", i + 1);
 
-			Color newColor = colors [0];
-			Color newColor2 = newColor;
-			newColor2.a = raysAlpha;
+            var renderers = clone.GetComponentsInChildren<Renderer>();
 
-			if (useGradient) {
-				newColor = gradient.Evaluate (((float)(i + 1) / (float)usedSoundBars));
-		
+            Color newColor = colors[0];
+            Color newColor2 = newColor;
+            newColor2.a = raysAlpha;
 
-				var rhythmParticleS = rhythmParticleSystem.main;
-				rhythmParticleS.startColor = rhythmParticleSystemColor;
-			}
+            if (useGradient)
+            {
+                newColor = gradient.Evaluate(((float)(i + 1) / (float)usedSoundBars));
 
-			foreach (Renderer rend in renderers) {
-				rend.material.color = newColor;
-			}
 
-			var actualParticleSystem = clone.GetComponentInChildren<ParticleSystem> ().main;
-			actualParticleSystem.startColor = newColor;
+                var rhythmParticleS = rhythmParticleSystem.main;
+                rhythmParticleS.startColor = rhythmParticleSystemColor;
+            }
 
-			clone.GetComponent<SoundBar> ().ray.material.SetColor ("_TintColor", newColor2);
+            foreach (Renderer rend in renderers)
+            {
+                rend.material.color = newColor;
+            }
 
-			if (scaleFrom == ScaleFrom.Downside) {
-				clone.GetComponent<SoundBar> ().ray.transform.localScale = new Vector3 (Mathf.Clamp (newWidth, 1, Mathf.Infinity), 1, raysLenght);
-				clone.GetComponent<SoundBar> ().ray.transform.localPosition = new Vector3 (0, newRayScale, 0);
-			} else {
-				clone.GetComponent<SoundBar> ().ray.transform.localScale = new Vector3 (Mathf.Clamp (newWidth, 0.5f, Mathf.Infinity), 1, raysLenght);
-			}
+            var actualParticleSystem = clone.GetComponentInChildren<ParticleSystem>().main;
+            actualParticleSystem.startColor = newColor;
+
+            clone.GetComponent<SoundBar>().ray.material.SetColor("_TintColor", newColor2);
+
+            if (scaleFrom == ScaleFrom.Downside)
+            {
+                clone.GetComponent<SoundBar>().ray.transform.localScale = new Vector3(Mathf.Clamp(newWidth, 1, Mathf.Infinity), 1, raysLenght);
+                clone.GetComponent<SoundBar>().ray.transform.localPosition = new Vector3(0, newRayScale, 0);
+            }
+            else
+            {
+                clone.GetComponent<SoundBar>().ray.transform.localScale = new Vector3(Mathf.Clamp(newWidth, 0.5f, Mathf.Infinity), 1, raysLenght);
+            }
 
 
             //// Add joints to the soundbars 
@@ -375,15 +381,18 @@ public class RhythmVisualizatorPro : MonoBehaviour {
             //else
             //{
             //    // If it is the first bar
-                Destroy(clone.GetComponent<ConfigurableJoint>());
-                clone.GetComponent<Rigidbody>().mass = 50;
+            Destroy(clone.GetComponent<ConfigurableJoint>());
+            clone.GetComponent<Rigidbody>().mass = 50;
 
+            if (clone.name == "SoundBar 1")
+            {
                 clone.AddComponent<SnakeMovement>();
                 clone.GetComponent<SnakeMovement>().distance = 500;
                 clone.GetComponent<SnakeMovement>().Speed = 0.2f;
+            }
             //}
 
-            soundBars.Add (clone);
+            soundBars.Add(clone);
 
             //prevClone = clone;
         }

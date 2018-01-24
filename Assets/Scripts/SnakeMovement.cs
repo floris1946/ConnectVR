@@ -14,36 +14,53 @@ public class SnakeMovement : MonoBehaviour {
 
     private Vector3 currentDestination;
 
-	// Use this for initialization
-	void Start()
+    private SetTargetPosition pointerState1;
+    private SetTargetPosition pointerState2;
+
+    // Use this for initialization
+    void Start()
     {
+        pointerState1 = GameObject.Find("LeftController").GetComponent<SetTargetPosition>();
+        pointerState2 = GameObject.Find("RightController").GetComponent<SetTargetPosition>();
         // Set current destination to current position
         currentDestination = gameObject.transform.position;
 
         time = 0f;
         SetRandomPeriod();
 	}
-	
-	// Update is called once per frame
-	void Update()
+
+    // Update is called once per frame
+    void Update()
     {
-        time += Time.deltaTime;
-
-        if (time >= randomPeriod)
+        if (pointerState1.pointer.IsPointerActive())
         {
-            SetNewDestination();
-            SetRandomPeriod();
-            time = 0f;
+            currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
+            time = 0;
         }
+        else if (pointerState2.pointer.IsPointerActive())
+        {
+            currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
+            time = 0;
+        }
+        else
+        {
+            time += Time.deltaTime;
 
+            if (time >= randomPeriod)
+            {
+                SetNewDestination();
+                SetRandomPeriod();
+                time = 0f;
+            }
+        }
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
 
-	}
+    }
 
     // Set the random period before the destination changes
     private void SetRandomPeriod()
     {
-        randomPeriod = Random.Range(3f, 8f);
+        randomPeriod = Random.Range(8f, 16f);
     }
 
     // Set random new destination within specified boundaries
