@@ -365,6 +365,8 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 				clone.GetComponent<SoundBar> ().ray.transform.localScale = new Vector3 (Mathf.Clamp (newWidth, 0.5f, Mathf.Infinity), 1, raysLenght);
 			}
 
+
+            // Add joints to the soundbars 
             if (prevClone != null)
             {
                 clone.GetComponent<ConfigurableJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
@@ -372,8 +374,13 @@ public class RhythmVisualizatorPro : MonoBehaviour {
             }
             else
             {
+                // If it is the first bar
                 Destroy(clone.GetComponent<ConfigurableJoint>());
                 clone.GetComponent<Rigidbody>().mass = 50;
+
+                clone.AddComponent<SnakeMovement>();
+                clone.GetComponent<SnakeMovement>().distance = 500;
+                clone.GetComponent<SnakeMovement>().Speed = 0.2f;
             }
 
             soundBars.Add (clone);
@@ -439,48 +446,48 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 	/// <summary>
 	/// Change to Camera Predefined Positions
 	/// </summary>
-	void CameraPosition () {
-		if (visualization == Visualizations.Line) {
-			Camera.main.fieldOfView = fieldOfView;
-			var cameraPos = transform.position;
-			cameraPos.z -= 170f;
-			Camera.main.transform.position = cameraPos;
-			cameraPos.y += 5f + height;
-			Camera.main.transform.position = cameraPos;
-			Camera.main.transform.LookAt (center);
+	//void CameraPosition () {
+	//	if (visualization == Visualizations.Line) {
+	//		Camera.main.fieldOfView = fieldOfView;
+	//		var cameraPos = transform.position;
+	//		cameraPos.z -= 170f;
+	//		Camera.main.transform.position = cameraPos;
+	//		cameraPos.y += 5f + height;
+	//		Camera.main.transform.position = cameraPos;
+	//		Camera.main.transform.LookAt (center);
 
 
-		} else if (visualization == Visualizations.Circle) {
-			Camera.main.fieldOfView = fieldOfView;
-			var cameraPos = transform.position;
-			cameraPos.y += ((1f + height) / 20f);
-			cameraPos.z += 5f; 
-			Camera.main.transform.position = cameraPos;
+	//	} else if (visualization == Visualizations.Circle) {
+	//		Camera.main.fieldOfView = fieldOfView;
+	//		var cameraPos = transform.position;
+	//		cameraPos.y += ((1f + height) / 20f);
+	//		cameraPos.z += 5f; 
+	//		Camera.main.transform.position = cameraPos;
 
-			Camera.main.transform.LookAt (soundBarsTransform.position);
+	//		Camera.main.transform.LookAt (soundBarsTransform.position);
 
-		} else if (visualization == Visualizations.ExpansibleCircle) {
-			Camera.main.fieldOfView = fieldOfView;
-			var cameraPos = transform.position;
-			cameraPos.y += 55f;
-			Camera.main.transform.position = cameraPos;
-			Camera.main.transform.LookAt (soundBarsTransform.position);
+	//	} else if (visualization == Visualizations.ExpansibleCircle) {
+	//		Camera.main.fieldOfView = fieldOfView;
+	//		var cameraPos = transform.position;
+	//		cameraPos.y += 55f;
+	//		Camera.main.transform.position = cameraPos;
+	//		Camera.main.transform.LookAt (soundBarsTransform.position);
 		
 
-		} else if (visualization == Visualizations.Sphere) {
-			Camera.main.fieldOfView = fieldOfView;
-			var cameraPos = transform.position;
-			cameraPos.z -= 40f;
-			cameraPos.y += 5f + height;
+	//	} else if (visualization == Visualizations.Sphere) {
+	//		Camera.main.fieldOfView = fieldOfView;
+	//		var cameraPos = transform.position;
+	//		cameraPos.z -= 40f;
+	//		cameraPos.y += 5f + height;
 
-			Camera.main.transform.position = cameraPos;
+	//		Camera.main.transform.position = cameraPos;
 
-			Camera.main.transform.LookAt (soundBarsTransform.position);
-			Camera.main.transform.position = cameraPos;
-		}
+	//		Camera.main.transform.LookAt (soundBarsTransform.position);
+	//		Camera.main.transform.position = cameraPos;
+	//	}
 
 	       
-	}
+	//}
 
 	void SetVisualizationPredefinedValues () {
 		if (visualizationNumber == 1) {
@@ -509,13 +516,13 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 	/// <summary>
 	/// Camera Rotating Around Movement.
 	/// </summary>
-	void CameraMovement () {
-		Camera.main.transform.position = center.position + (Camera.main.transform.position - center.position).normalized * orbitDistance;
+	//void CameraMovement () {
+	//	Camera.main.transform.position = center.position + (Camera.main.transform.position - center.position).normalized * orbitDistance;
 
-		if (rotateCamera) {
-			Camera.main.transform.RotateAround (center.position, Vector3.up, -velocity * Time.deltaTime);
-		}
-	}
+	//	if (rotateCamera) {
+	//		Camera.main.transform.RotateAround (center.position, Vector3.up, -velocity * Time.deltaTime);
+	//	}
+	//}
 
 	#endregion
 
@@ -650,7 +657,7 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
 			}
 
-			CameraPosition ();
+			//CameraPosition ();
 
 		}
 	}
@@ -933,10 +940,10 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 			remainingRhythmParticlesTime -= Time.deltaTime;
 		}
 
-		// Execute Camera Control
-		if (cameraControl) {
-			CameraMovement ();
-		}
+		//// Execute Camera Control
+		//if (cameraControl) {
+		//	CameraMovement ();
+		//}
 	}
 
 	void EmitParticle (int index, float spectrumValue) {
