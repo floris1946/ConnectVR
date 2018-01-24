@@ -14,14 +14,14 @@ public class SnakeMovement : MonoBehaviour {
 
     private Vector3 currentDestination;
 
-    private SetTargetPosition pointerState1;
-    private SetTargetPosition pointerState2;
+    private PointerProperties pointerState1;
+    private PointerProperties pointerState2;
 
     // Use this for initialization
     void Start()
     {
-        pointerState1 = GameObject.Find("LeftController").GetComponent<SetTargetPosition>();
-        pointerState2 = GameObject.Find("RightController").GetComponent<SetTargetPosition>();
+        pointerState1 = GameObject.Find("LeftController").GetComponent<PointerProperties>();
+        pointerState2 = GameObject.Find("RightController").GetComponent<PointerProperties>();
         // Set current destination to current position
         currentDestination = gameObject.transform.position;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
-public class SetTargetPosition : MonoBehaviour {
+public class PointerProperties : MonoBehaviour {
 
     public VRTK_Pointer pointer;
     public VRTK_StraightPointerRenderer pRenderer;
