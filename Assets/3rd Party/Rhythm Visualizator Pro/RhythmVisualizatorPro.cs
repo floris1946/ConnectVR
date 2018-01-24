@@ -366,26 +366,26 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 			}
 
 
-            // Add joints to the soundbars 
-            if (prevClone != null)
-            {
-                clone.GetComponent<ConfigurableJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
-                clone.GetComponent<ConfigurableJoint>().connectedAnchor = new Vector3(1, 0);
-            }
-            else
-            {
-                // If it is the first bar
+            //// Add joints to the soundbars 
+            //if (prevClone != null)
+            //{
+            //    clone.GetComponent<ConfigurableJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
+            //    clone.GetComponent<ConfigurableJoint>().connectedAnchor = new Vector3(1, 0);
+            //}
+            //else
+            //{
+            //    // If it is the first bar
                 Destroy(clone.GetComponent<ConfigurableJoint>());
                 clone.GetComponent<Rigidbody>().mass = 50;
 
                 clone.AddComponent<SnakeMovement>();
                 clone.GetComponent<SnakeMovement>().distance = 500;
                 clone.GetComponent<SnakeMovement>().Speed = 0.2f;
-            }
+            //}
 
             soundBars.Add (clone);
 
-            prevClone = clone;
+            //prevClone = clone;
         }
 
 		UpdateVisualizations ();

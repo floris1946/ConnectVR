@@ -50,20 +50,22 @@ public class SnakeMovement : MonoBehaviour {
     private void SetNewDestination()
     {
         Vector3 center = SteamVR_Render.Top().camera.transform.position;
-
         Vector3 randomLocation = Random.insideUnitSphere;
+        Vector3 newDestination = center + randomLocation * distance;
+
+        gameObject.transform.LookAt(newDestination);
+
+        currentDestination = newDestination;
 
 
-        currentDestination = center + randomLocation * distance;
-
-        Debug.Log("new random destination: " + currentDestination);
+        //Debug.Log("new random destination: " + currentDestination);
     }
 
     // Set new destination with random z value
     public void SetNewDestination(float x, float y)
     {
         //currentDestination = new Vector3(x, y, Random.Range(minZ, maxZ));
-        Debug.Log("new destination: " + currentDestination);
+       // Debug.Log("new destination: " + currentDestination);
     }
 
     // Set new destination with random z value
