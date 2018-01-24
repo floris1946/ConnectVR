@@ -374,6 +374,7 @@ public class RhythmVisualizatorPro : MonoBehaviour {
             {
                 Destroy(clone.GetComponent<ConfigurableJoint>());
                 clone.GetComponent<Rigidbody>().mass = 50;
+                clone.AddComponent<SnakeScript>();
             }
 
             soundBars.Add (clone);
