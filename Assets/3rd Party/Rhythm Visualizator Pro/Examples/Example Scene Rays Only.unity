@@ -8233,7 +8233,7 @@ Prefab:
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: bassSensibility
-      value: 107
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
@@ -8243,12 +8243,12 @@ Prefab:
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: ScaleByRhythm
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: barsQuantity
-      value: 35
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
@@ -8286,6 +8286,11 @@ Prefab:
         type: 2}
       propertyPath: soundBarsWidth
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: trebleSensibility
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
