@@ -8204,7 +8204,7 @@ Prefab:
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: trebleSensibility
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
@@ -8221,6 +8221,21 @@ Prefab:
       propertyPath: snakeHead
       value: 
       objectReference: {fileID: 1163369376}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: trebleOffset
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: bassOffset
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: bassSensibility
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
   m_IsPrefabParent: 0
@@ -8781,7 +8796,7 @@ MonoBehaviour:
   speed: 2.5
   currentRotation: 0
   rotationSensitivity: 50
-  Distance: 500
+  Distance: 200
   Speed: 0.05
   bodyParts: []
 --- !u!23 &1163369378
@@ -15240,7 +15255,7 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 286
+      value: 1013
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
