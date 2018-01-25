@@ -11,7 +11,10 @@ using UnityEngine.SceneManagement;
 
 
 public class RhythmVisualizatorPro : MonoBehaviour {
-    
+
+    [SerializeField]
+    private GameObject snakeHead;
+
 	#region Variables
 
 	public GameObject soundBarPrefabCenter;
@@ -367,24 +370,10 @@ public class RhythmVisualizatorPro : MonoBehaviour {
 
             if (prevClone != null)
             {
-                clone.GetComponent<ConfigurableJoint>().connectedBody = prevClone.GetComponent<Rigidbody>();
-                clone.GetComponent<ConfigurableJoint>().connectedAnchor = new Vector3(1, 0);
-
-                if (i == usedSoundBars - 1)
-                {
-                    clone.GetComponent<Rigidbody>().mass = 50;
-                    clone.AddComponent<SnakeScript>();
-                    clone.GetComponent<SnakeScript>().Speed = 0.2f;
-                    clone.GetComponent<SnakeScript>().Distance = 500;
-                }
-            }
-            else
-            {
                 Destroy(clone.GetComponent<ConfigurableJoint>());
-                clone.GetComponent<Rigidbody>().mass = 50;
-                clone.AddComponent<SnakeScript>();
-                clone.GetComponent<SnakeScript>().Speed = 0.2f;
-                clone.GetComponent<SnakeScript>().Distance = 500;
+                //clone.GetComponent<Rigidbody>().mass = 50;
+                clone.AddComponent<SnakeBody>();
+                snakeHead.GetComponent<SnakeMovement>().bodyParts.Add(clone.transform);
             }
 
             soundBars.Add (clone);
