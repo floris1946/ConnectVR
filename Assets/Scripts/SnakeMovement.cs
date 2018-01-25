@@ -61,7 +61,9 @@ public class SnakeMovement : MonoBehaviour {
             }
         }
         //GetComponent<Rigidbody>().AddForce((force * Speed));
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
+        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
+
+        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * 0.8f, ForceMode.Force);
 
         float amplitude = 4;
         float frequency = 0.25f;
@@ -92,21 +94,6 @@ public class SnakeMovement : MonoBehaviour {
     private void SetRandomPeriod()
     {
         randomPeriod = Random.Range(0.2f, 3f);
-    }
-
-    private float RandomAngle()
-    {
-        return Random.Range(-40f, 40f);
-    }
-
-    private float InterpolatedAngle(float current, float target)
-    {
-        return Mathf.MoveTowardsAngle(current, target, Speed * Time.deltaTime);
-    }
-
-    private Vector3 NewDirection()
-    {
-        return new Vector3(InterpolatedAngle(transform.eulerAngles.x, RandomAngle()), InterpolatedAngle(transform.eulerAngles.y, RandomAngle()), InterpolatedAngle(transform.eulerAngles.z, RandomAngle()));
     }
 
     // Set new random destination
