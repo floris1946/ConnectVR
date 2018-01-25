@@ -14,6 +14,7 @@ public class SnakeMovement : MonoBehaviour {
     private float time;
     private float randomPeriod;
 
+    private Vector3 force;
     private Vector3 currentDestination;
 
     private PointerProperties pointerState1;
@@ -59,22 +60,53 @@ public class SnakeMovement : MonoBehaviour {
                 time = 0f;
             }
         }
+        //GetComponent<Rigidbody>().AddForce((force * Speed));
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
 
-        float amplitude = 5;
-        float frequency = 0.5f;
+        float amplitude = 4;
+        float frequency = 0.25f;
 
+        // wiggle
         transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
 
 
         Rotation();
 
+        //Debug.DrawLine(transform.position, currentDestination);
+
+    }
+
+    public static Vector3 GetPointOnUnitSphereCap(Quaternion targetDirection, float angle)
+    {
+        var angleInRad = Random.Range(0.0f, angle) * Mathf.Deg2Rad;
+        var PointOnCircle = (Random.insideUnitCircle.normalized) * Mathf.Sin(angleInRad);
+        var V =  new Vector3(PointOnCircle.x, PointOnCircle.y, Mathf.Cos(angleInRad));
+        return targetDirection * V;
+    }
+    public static Vector3 GetPointOnUnitSphereCap(Vector3 targetDirection, float angle)
+    {
+        return GetPointOnUnitSphereCap(Quaternion.LookRotation(targetDirection), angle);
     }
 
     // Set a random period before a new destination is chosen
     private void SetRandomPeriod()
     {
-        randomPeriod = Random.Range(5f, 8f);
+        randomPeriod = Random.Range(0.2f, 3f);
+    }
+
+    private float RandomAngle()
+    {
+        return Random.Range(-40f, 40f);
+    }
+
+    private float InterpolatedAngle(float current, float target)
+    {
+        return Mathf.MoveTowardsAngle(current, target, Speed * Time.deltaTime);
+    }
+
+    private Vector3 NewDirection()
+    {
+        return new Vector3(InterpolatedAngle(transform.eulerAngles.x, RandomAngle()), InterpolatedAngle(transform.eulerAngles.y, RandomAngle()), InterpolatedAngle(transform.eulerAngles.z, RandomAngle()));
     }
 
     // Set new random destination
@@ -87,10 +119,12 @@ public class SnakeMovement : MonoBehaviour {
         else
             center = SteamVR_Render.Top().camera.transform.position;
 
-        Vector3 randomLocation = Random.insideUnitSphere;
+        Vector3 randomLocation = GetPointOnUnitSphereCap(currentDestination, 20);//Random.insideUnitSphere;
         Vector3 newDestination = center + randomLocation * Distance;
 
         currentDestination = newDestination;
+
+        //force += Quaternion.AngleAxis(Random.Range(-30f, 30f), Vector3.forward) * Vector3.one;
     }
 
     void Rotation()
