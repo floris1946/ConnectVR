@@ -36,6 +36,7 @@ public class SnakeMovement : MonoBehaviour {
 
     void Update()
     {
+
         if (pointerState1.pointer.IsPointerActive())
         {
             currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
@@ -59,6 +60,13 @@ public class SnakeMovement : MonoBehaviour {
             }
         }
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
+
+        float amplitude = 5;
+        float frequency = 0.5f;
+
+        transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
+
+
         Rotation();
 
     }
