@@ -30,15 +30,18 @@ public class SnakeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pointerState1.pointer.IsPointerActive())
+        if (name == "SoundBar 1")
         {
-            currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
-            time = 0;
-        }
-        else if (pointerState2.pointer.IsPointerActive())
-        {
-            currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
-            time = 0;
+            if (pointerState1.pointer.IsPointerActive())
+            {
+                currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
+                time = 0;
+            }
+            else if (pointerState2.pointer.IsPointerActive())
+            {
+                currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
+                time = 0;
+            }
         }
         else
         {
