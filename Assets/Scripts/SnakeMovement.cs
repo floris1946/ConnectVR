@@ -6,7 +6,6 @@ public class SnakeMovement : MonoBehaviour {
     
     public float currentRotation;
     public float rotationSensitivity = 50.0f;
-
     public float Distance;
 
     private float time;
@@ -17,6 +16,8 @@ public class SnakeMovement : MonoBehaviour {
     private float frequency = 0.25f;
     [SerializeField]
     private float wanderSpeed = 0.6f;
+    [SerializeField]
+    private float followSpeed = 1f;
 
     private Vector3 force;
     private Vector3 currentDestination;
@@ -41,6 +42,7 @@ public class SnakeMovement : MonoBehaviour {
 
     void Update()
     {
+        float speed = followSpeed;
 
         if (pointerState1.pointer.IsPointerActive())
         {
@@ -52,9 +54,10 @@ public class SnakeMovement : MonoBehaviour {
             currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
             time = 0;
         }
-
         else
         {
+            speed = wanderSpeed;
+
             time += Time.deltaTime;
 
             if (time >= randomPeriod)
@@ -66,7 +69,9 @@ public class SnakeMovement : MonoBehaviour {
         }
 
         // Wandering
-        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * wanderSpeed, ForceMode.Force);
+        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * speed, ForceMode.Force);
+
+        Debug.Log("speed = " + speed);
 
         // Sine movement
         transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
@@ -104,12 +109,10 @@ public class SnakeMovement : MonoBehaviour {
         else
             center = SteamVR_Render.Top().camera.transform.position;
 
-        Vector3 randomLocation = GetPointOnUnitSphereCap(currentDestination, 20);//Random.insideUnitSphere;
+        Vector3 randomLocation = GetPointOnUnitSphereCap(currentDestination, 20);
         Vector3 newDestination = center + randomLocation * Distance;
 
         currentDestination = newDestination;
-
-        //force += Quaternion.AngleAxis(Random.Range(-30f, 30f), Vector3.forward) * Vector3.one;
     }
 
     void Rotation()
