@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour {
 
+    [SerializeField]
+    private Transform startPosition;
+
     public float speed = 2.5f;
     public float currentRotation;
     public float rotationSensitivity = 50.0f;
@@ -22,6 +25,14 @@ public class SnakeMovement : MonoBehaviour {
 
     public List<Transform> bodyParts = new List<Transform>();
 
+    private float timer;
+    [SerializeField]
+    private float endTime;
+    [SerializeField]
+    private float beginSpeed;
+
+    private bool begin = true;
+
     // Use this for initialization
     void Start()
     {
@@ -30,40 +41,52 @@ public class SnakeMovement : MonoBehaviour {
         // Set current destination to current position
         currentDestination = gameObject.transform.position;
 
+        MoveTowardsStartPosition();
+
         time = 0f;
         SetRandomPeriod();
     }
 
+    private void MoveTowardsStartPosition()
+    {
+        currentDestination = startPosition.position;
+    }
 
     void Update()
     {
-
-        if (pointerState1.pointer.IsPointerActive())
+        timer += Time.deltaTime;
+        if (begin && Vector3.Distance(transform.position, currentDestination) > 10)
         {
-            currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
-            time = 0;
+            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
         }
-        else if (pointerState2.pointer.IsPointerActive())
-        {
-            currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
-            time = 0;
-        }
-
         else
         {
-            time += Time.deltaTime;
-
-            if (time >= randomPeriod)
+            begin = false;
+            if (pointerState1.pointer.IsPointerActive())
             {
-                SetNewDestination();
-                SetRandomPeriod();
-                time = 0f;
+                currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
+                time = 0;
             }
-        }
-        //GetComponent<Rigidbody>().AddForce((force * Speed));
-        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
+            else if (pointerState2.pointer.IsPointerActive())
+            {
+                currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
+                time = 0;
+            }
 
-        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * 0.8f, ForceMode.Force);
+            else
+            {
+                time += Time.deltaTime;
+
+                if (time >= randomPeriod)
+                {
+                    SetNewDestination();
+                    SetRandomPeriod();
+                    time = 0f;
+                }
+            }
+
+            GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * 0.8f, ForceMode.Force);
+        }
 
         float amplitude = 4;
         float frequency = 0.25f;
@@ -73,9 +96,6 @@ public class SnakeMovement : MonoBehaviour {
 
 
         Rotation();
-
-        //Debug.DrawLine(transform.position, currentDestination);
-
     }
 
     public static Vector3 GetPointOnUnitSphereCap(Quaternion targetDirection, float angle)
