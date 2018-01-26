@@ -6,6 +6,8 @@ public class SnakeMovement : MonoBehaviour {
 
     [SerializeField]
     private Transform startPosition;
+    [SerializeField]
+    private Transform endPosition;
 
     public float speed = 2.5f;
     public float currentRotation;
@@ -30,7 +32,6 @@ public class SnakeMovement : MonoBehaviour {
     private float endTime;
     [SerializeField]
     private float beginSpeed;
-
     private bool begin = true;
 
     // Use this for initialization
@@ -41,8 +42,6 @@ public class SnakeMovement : MonoBehaviour {
         // Set current destination to current position
         currentDestination = gameObject.transform.position;
 
-        MoveTowardsStartPosition();
-
         time = 0f;
         SetRandomPeriod();
     }
@@ -51,12 +50,22 @@ public class SnakeMovement : MonoBehaviour {
     {
         currentDestination = startPosition.position;
     }
+    private void MoveTowardsEndPosition()
+    {
+        currentDestination = endPosition.position;
+    }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (begin && Vector3.Distance(transform.position, currentDestination) > 10)
+        if (begin && Vector3.Distance(transform.position, currentDestination) > 20)
         {
+            MoveTowardsStartPosition();
+            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
+        }
+        else if (timer > endTime)
+        {
+            MoveTowardsEndPosition();
             transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
         }
         else
