@@ -39,6 +39,7 @@ public class SnakeMovement : MonoBehaviour {
     private float endTime;
     [SerializeField]
     private float beginSpeed;
+    private float beginSpeedTransition;
     private bool begin = true;
 
     private bool isPointerPressed
@@ -62,7 +63,8 @@ public class SnakeMovement : MonoBehaviour {
         pointerState2 = GameObject.Find("RightController").GetComponent<PointerProperties>();
         // Set current destination to current position
         currentDestination = gameObject.transform.position;
-            MoveTowardsStartPosition();
+        MoveTowardsStartPosition();
+        beginSpeedTransition = beginSpeed;
         time = 0f;
         SetRandomPeriod();
     }
@@ -76,18 +78,22 @@ public class SnakeMovement : MonoBehaviour {
         currentDestination = endPosition.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float speed = wanderSpeed;
 
+        Debug.Log(beginSpeedTransition);
+
         if (begin && Vector3.Distance(transform.position, currentDestination) > 20)
         {
-            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeedTransition * Time.deltaTime);
+            //beginSpeedTransition = Mathf.Lerp(beginSpeed, speed, /* todo */ );
         }
         else if (timer > endTime)
         {
             MoveTowardsEndPosition();
-            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeedTransition * Time.deltaTime);
+           // beginSpeedTransition = Mathf.Lerp(speed, beginSpeed, Time.deltaTime);
         }
         else
         {
