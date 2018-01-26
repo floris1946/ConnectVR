@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour {
-
-    public float speed = 2.5f;
+    
     public float currentRotation;
     public float rotationSensitivity = 50.0f;
 
     public float Distance;
-    public float Speed;
 
     private float time;
     private float randomPeriod;
+    [SerializeField]
+    private float amplitude = 2;
+    [SerializeField]
+    private float frequency = 0.25f;
+    [SerializeField]
+    private float wanderSpeed = 0.6f;
 
     private Vector3 force;
     private Vector3 currentDestination;
@@ -60,21 +64,15 @@ public class SnakeMovement : MonoBehaviour {
                 time = 0f;
             }
         }
-        //GetComponent<Rigidbody>().AddForce((force * Speed));
-        //gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, currentDestination, Time.deltaTime * Speed);
 
-        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * 0.8f, ForceMode.Force);
+        // Wandering
+        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * wanderSpeed, ForceMode.Force);
 
-        float amplitude = 4;
-        float frequency = 0.25f;
-
-        // wiggle
+        // Sine movement
         transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
 
 
         Rotation();
-
-        //Debug.DrawLine(transform.position, currentDestination);
 
     }
 
