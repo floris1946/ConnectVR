@@ -30,6 +30,8 @@ public class SnakeMovement : MonoBehaviour {
     private PointerProperties pointerState1;
     private PointerProperties pointerState2;
 
+    private bool isPointerActivePrev1, isPointerActivePrev2;
+
     public List<Transform> bodyParts = new List<Transform>();
 
     private float timer;
@@ -38,6 +40,20 @@ public class SnakeMovement : MonoBehaviour {
     [SerializeField]
     private float beginSpeed;
     private bool begin = true;
+
+    private bool isPointerPressed
+    {
+        get
+        {
+            if (!isPointerActivePrev1 && pointerState1.pointer.IsPointerActive())
+                return true;
+
+            if (!isPointerActivePrev2 && pointerState2.pointer.IsPointerActive())
+                return true;
+
+            return false;
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -62,7 +78,7 @@ public class SnakeMovement : MonoBehaviour {
 
     void Update()
     {
-        float speed = followSpeed;
+        float speed = wanderSpeed;
 
         if (begin && Vector3.Distance(transform.position, currentDestination) > 20)
         {
@@ -75,18 +91,24 @@ public class SnakeMovement : MonoBehaviour {
         }
         else
         {
+            speed = followSpeed;
             begin = false;
             if (pointerState1.pointer.IsPointerActive())
             {
                 currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
                 time = 0;
+
+                Debug.DrawLine(pointerState1.pRenderer.GetPointerObjects()[1].transform.position, transform.position, Color.green);
+                
             }
             else if (pointerState2.pointer.IsPointerActive())
             {
                 currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
                 time = 0;
-            }
 
+                Debug.DrawLine(pointerState2.pRenderer.GetPointerObjects()[1].transform.position, transform.position, Color.green);
+                
+            }
             else
             {
                 speed = wanderSpeed;
@@ -100,17 +122,28 @@ public class SnakeMovement : MonoBehaviour {
                 }
             }
 
+            Debug.DrawLine(Vector3.zero, currentDestination, Color.blue);
+
+            if (isPointerPressed)
+            {
+                Debug.Log("pointer pressed");
+                // make a turn towards the pointer
+                GetComponent<Rigidbody>().velocity = Vector3.Normalize(currentDestination) * speed;
+            }
+
             // Wandering
             GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * speed, ForceMode.Force);
         }
-
-        Debug.Log("speed = " + speed);
 
         // Sine movement
         transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
 
 
         Rotation();
+
+
+        isPointerActivePrev1 = pointerState1.pointer.IsPointerActive();
+        isPointerActivePrev2 = pointerState2.pointer.IsPointerActive();
 
     }
 
@@ -129,7 +162,7 @@ public class SnakeMovement : MonoBehaviour {
     // Set a random period before a new destination is chosen
     private void SetRandomPeriod()
     {
-        randomPeriod = Random.Range(0.2f, 3f);
+        randomPeriod = Random.Range(5f, 8f);
     }
 
     // Set new random destination

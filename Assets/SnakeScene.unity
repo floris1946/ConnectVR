@@ -9237,7 +9237,7 @@ MonoBehaviour:
   amplitude: 1.5
   frequency: 0.5
   wanderSpeed: 0.6
-  followSpeed: 1
+  followSpeed: 0.6
   bodyParts: []
   endTime: 300
   beginSpeed: 50
