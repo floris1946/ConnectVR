@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeMovement : MonoBehaviour {
+
+    [SerializeField]
+    private Transform startPosition;
+    [SerializeField]
+    private Transform endPosition;
     
     public float currentRotation;
     public float rotationSensitivity = 50.0f;
@@ -27,6 +32,13 @@ public class SnakeMovement : MonoBehaviour {
 
     public List<Transform> bodyParts = new List<Transform>();
 
+    private float timer;
+    [SerializeField]
+    private float endTime;
+    [SerializeField]
+    private float beginSpeed;
+    private bool begin = true;
+
     // Use this for initialization
     void Start()
     {
@@ -34,42 +46,63 @@ public class SnakeMovement : MonoBehaviour {
         pointerState2 = GameObject.Find("RightController").GetComponent<PointerProperties>();
         // Set current destination to current position
         currentDestination = gameObject.transform.position;
-
+            MoveTowardsStartPosition();
         time = 0f;
         SetRandomPeriod();
     }
 
+    private void MoveTowardsStartPosition()
+    {
+        currentDestination = startPosition.position;
+    }
+    private void MoveTowardsEndPosition()
+    {
+        currentDestination = endPosition.position;
+    }
 
     void Update()
     {
         float speed = followSpeed;
 
-        if (pointerState1.pointer.IsPointerActive())
+        if (begin && Vector3.Distance(transform.position, currentDestination) > 20)
         {
-            currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
-            time = 0;
+            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
         }
-        else if (pointerState2.pointer.IsPointerActive())
+        else if (timer > endTime)
         {
-            currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
-            time = 0;
+            MoveTowardsEndPosition();
+            transform.position = Vector3.MoveTowards(transform.position, currentDestination, beginSpeed * Time.deltaTime);
         }
         else
         {
-            speed = wanderSpeed;
-
-            time += Time.deltaTime;
-
-            if (time >= randomPeriod)
+            begin = false;
+            if (pointerState1.pointer.IsPointerActive())
             {
-                SetNewDestination();
-                SetRandomPeriod();
-                time = 0f;
+                currentDestination = pointerState1.pRenderer.GetPointerObjects()[1].transform.position;
+                time = 0;
             }
-        }
+            else if (pointerState2.pointer.IsPointerActive())
+            {
+                currentDestination = pointerState2.pRenderer.GetPointerObjects()[1].transform.position;
+                time = 0;
+            }
 
-        // Wandering
-        GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * speed, ForceMode.Force);
+            else
+            {
+                speed = wanderSpeed;
+                time += Time.deltaTime;
+
+                if (time >= randomPeriod)
+                {
+                    SetNewDestination();
+                    SetRandomPeriod();
+                    time = 0f;
+                }
+            }
+
+            // Wandering
+            GetComponent<Rigidbody>().AddRelativeForce((currentDestination - transform.position).normalized * speed, ForceMode.Force);
+        }
 
         Debug.Log("speed = " + speed);
 

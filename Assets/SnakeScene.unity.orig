@@ -1640,7 +1640,11 @@ Transform:
   - {fileID: 1745480014}
   - {fileID: 639799774}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 11
+=======
+  m_RootOrder: 12
+>>>>>>> start-end
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &224124451
 GameObject:
@@ -4478,7 +4482,11 @@ Transform:
   - {fileID: 1753781342}
   - {fileID: 2134293819}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 10
+=======
+  m_RootOrder: 11
+>>>>>>> start-end
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &626355198
 MonoBehaviour:
@@ -5838,7 +5846,11 @@ Transform:
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 8
+=======
+  m_RootOrder: 9
+>>>>>>> start-end
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &761291233
 MonoBehaviour:
@@ -8642,7 +8654,25 @@ Prefab:
     - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
         type: 2}
       propertyPath: bassSensibility
+      value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: amountToEmit
+      value: 5
+      objectReference: {fileID: 0}
+<<<<<<< HEAD
+    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: minHeight
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 82330127656035978, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dcbd7a4fc49de03458c29187ff90f43b, type: 3}
+=======
     - target: {fileID: 428370, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
       propertyPath: m_LocalScale.x
       value: -1
@@ -8655,21 +8685,7 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
-        type: 2}
-      propertyPath: amountToEmit
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114968279273234898, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
-        type: 2}
-      propertyPath: minHeight
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 82330127656035978, guid: 210ae554ebe46ba4583c3f4de73a8cfa,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: dcbd7a4fc49de03458c29187ff90f43b, type: 3}
+>>>>>>> start-end
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210ae554ebe46ba4583c3f4de73a8cfa, type: 2}
   m_IsPrefabParent: 0
@@ -9228,8 +9244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5ea5c1eeba1144cada5f28fb90e0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
   startPosition: {fileID: 1363814291}
   endPosition: {fileID: 1387891885}
+  speed: 2.5
+>>>>>>> start-end
   currentRotation: 0
   rotationSensitivity: 50
   Distance: 200
@@ -9303,7 +9323,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 12
+=======
+  m_RootOrder: 13
+>>>>>>> start-end
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1163369382
 Rigidbody:
@@ -10183,6 +10207,8 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343559275}
+<<<<<<< HEAD
+=======
 --- !u!1001 &1344462778
 Prefab:
   m_ObjectHideFlags: 0
@@ -10247,6 +10273,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7225f05cfcdf16146962a954c6aa5b05, type: 2}
   m_IsPrefabParent: 0
+>>>>>>> start-end
 --- !u!1 &1346984858
 GameObject:
   m_ObjectHideFlags: 0
@@ -11320,7 +11347,11 @@ Transform:
   m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 9
+=======
+  m_RootOrder: 10
+>>>>>>> start-end
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1549879483
 MonoBehaviour:
@@ -15955,7 +15986,11 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
+<<<<<<< HEAD
       value: 10
+=======
+      value: 661
+>>>>>>> start-end
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}

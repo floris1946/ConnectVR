@@ -332,7 +332,7 @@ public class RhythmVisualizatorPro : MonoBehaviour {
         for (int i = 0; i < usedSoundBars; i++) { 
 
 			
-			var clone = Instantiate (soundBarToInstantiate, transform.position, Quaternion.identity) as GameObject;
+			var clone = Instantiate (soundBarToInstantiate, snakeHead.transform.position, Quaternion.identity) as GameObject;
 			clone.transform.SetParent (soundBarsTransform.transform);
 			clone.GetComponent<SoundBar> ().cube.transform.localScale = new Vector3 (soundBarsWidth, 1, 1);
 
